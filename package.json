@@ -1,0 +1,14 @@
+{
+  "name": "com-outsystems-minsdkversionchanger",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "com-outsystems-minsdkversionchanger",
+    "platforms": []
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "",
+  "license": "ISC"
+}

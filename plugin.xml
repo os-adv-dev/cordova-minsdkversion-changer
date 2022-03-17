@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com-outsystems-minsdkversionchanger" version="1.0-OS"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>minsdkversionchanger</name>
+
+
+     <platform name="android">
+
+        <hook type="after_plugin_install" src="hooks/minSDKVersionChangerAndroid.js" />
+        <hook type="after_prepare" src="hooks/minSDKVersionChangerAndroid.js" />
+        <hook type="before_build" src="hooks/minSDKVersionChangerAndroid.js" />
+
+        <preference name="ANDROID_MIN_SDK_VERSION" default="24"/>
+
+    </platform>
+
+    <platform name="ios">
+
+
+        <hook type="after_plugin_install" src="hooks/minSDKVersionChangeriOS.js" />
+        <hook type="before_prepare" src="hooks/minSDKVersionChangeriOS.js" />
+        <hook type="before_build" src="hooks/minSDKVersionChangeriOS.js" />
+        <hook type="before_compile" src="hooks/minSDKVersionChangeriOS.js" />
+
+        <preference name="IOS_MIN_SDK_VERSION" default="12.0"/>
+
+    </platform>
+</plugin>
