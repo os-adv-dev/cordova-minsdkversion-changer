@@ -84,7 +84,9 @@ module.exports = function(context) {
             
                 fs.writeFileSync(podfilePath, updatedContents, 'utf8');
                 
-                console.log("updatedContents", updatedContents);
+                var content2 = fs.readFileSync(podfilePath,"utf-8");
+
+                console.log("NEWPODFILE", content2);
                 /*fs.writeFile(podfilePath, updatedContents, 'utf8', function (err) {
                     if (err) {
                     throw new Error('Unable to write to Podfile: ' + err);
@@ -95,7 +97,9 @@ module.exports = function(context) {
                 var newContents = content.trim() + '\n\npost_install do |installer|\n' + postInstallScript.trim() + '\nend\n';
             
                 fs.writeFileSync(podfilePath, newContents, 'utf8');
-                console.log("newContents", newContents);
+                var content2 = fs.readFileSync(podfilePath,"utf-8");
+
+                console.log("NEWPODFILE - C", content2);
                 /*fs.writeFile(podfilePath, newContents, 'utf8', function (err) {
                     if (err) {
                     throw new Error('Unable to write to Podfile: ' + err);
@@ -116,7 +120,6 @@ module.exports = function(context) {
                     console.log("error :"+error);
                 }
             })
-            console.log(output.stdout);
         //});
 
         /*content+= "post_install do |installer|\n\
