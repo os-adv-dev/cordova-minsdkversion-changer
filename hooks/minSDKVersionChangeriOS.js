@@ -76,20 +76,24 @@ module.exports = function(context) {
                     return match.replace(/end/, '') + "\n" + postInstallScript.trim() + '\nend';
                 });
             
-                fs.writeFile(podfilePath, updatedContents, 'utf8', function (err) {
+                fs.writeFileSync(podfilePath, updatedContents, 'utf8');
+
+                /*fs.writeFile(podfilePath, updatedContents, 'utf8', function (err) {
                     if (err) {
                     throw new Error('Unable to write to Podfile: ' + err);
                     }
-                });
+                });*/
             } else {
                 // If post_install doesn't exist, add it to the Podfile
                 var newContents = data.trim() + '\n\npost_install do |installer|\n' + postInstallScript.trim() + '\nend\n';
             
-                fs.writeFile(podfilePath, newContents, 'utf8', function (err) {
+                fs.writeFileSync(podfilePath, newContents, 'utf8');
+
+                /*fs.writeFile(podfilePath, newContents, 'utf8', function (err) {
                     if (err) {
                     throw new Error('Unable to write to Podfile: ' + err);
                     }
-                });
+                });*/
             }
         });
 
