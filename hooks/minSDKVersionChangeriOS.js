@@ -62,17 +62,17 @@ module.exports = function(context) {
         end
     end`;
 
-        fs.readFile(podfilePath, 'utf8', function (err, data) {
-            if (err) {
+        //fs.readFile(podfilePath, 'utf8', function (err, data) {
+            /*if (err) {
               throw new Error('Unable to find Podfile: ' + err);
-            }
+            }*/
 
             var postInstallRegex = /post_install do \|installer\|[^]+end/m;
-            var postInstallMatch = data.match(postInstallRegex);
+            var postInstallMatch = content.match(postInstallRegex);
         
             if (postInstallMatch) {
                 // If post_install already exists, update it by replacing the script
-                var updatedContents = data.replace(postInstallRegex, function (match) {
+                var updatedContents = content.replace(postInstallRegex, function (match) {
                     return match.replace(/end/, '') + "\n" + postInstallScript.trim() + '\nend';
                 });
             
@@ -85,7 +85,7 @@ module.exports = function(context) {
                 });*/
             } else {
                 // If post_install doesn't exist, add it to the Podfile
-                var newContents = data.trim() + '\n\npost_install do |installer|\n' + postInstallScript.trim() + '\nend\n';
+                var newContents = content.trim() + '\n\npost_install do |installer|\n' + postInstallScript.trim() + '\nend\n';
             
                 fs.writeFileSync(podfilePath, newContents, 'utf8');
 
@@ -95,7 +95,7 @@ module.exports = function(context) {
                     }
                 });*/
             }
-        });
+        //});
 
         /*content+= "post_install do |installer|\n\
                     installer.pods_project.targets.each do |target|\n\
