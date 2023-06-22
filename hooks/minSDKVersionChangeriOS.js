@@ -52,6 +52,12 @@ module.exports = function(context) {
     
         var content = fs.readFileSync(podfilePath,"utf-8");
     
+        const podAlreadyInstalled = content.includes("platform :ios, '"+iosVersion+"'") || content.includes("platform :ios, '"+iosVersionInt+"'")
+
+        if(podAlreadyInstalled){
+            return;
+        }
+
         content = content.replace(/([\s|\S]*)(platform :ios, '[0-9]+\.[0-9]+')([\S|\s]*)/,replacepodfile);
 
         var postInstallScript = `
@@ -77,7 +83,8 @@ module.exports = function(context) {
                 });
             
                 fs.writeFileSync(podfilePath, updatedContents, 'utf8');
-
+                
+                console.log("updatedContents", updatedContents);
                 /*fs.writeFile(podfilePath, updatedContents, 'utf8', function (err) {
                     if (err) {
                     throw new Error('Unable to write to Podfile: ' + err);
@@ -88,25 +95,14 @@ module.exports = function(context) {
                 var newContents = content.trim() + '\n\npost_install do |installer|\n' + postInstallScript.trim() + '\nend\n';
             
                 fs.writeFileSync(podfilePath, newContents, 'utf8');
-
+                console.log("newContents", newContents);
                 /*fs.writeFile(podfilePath, newContents, 'utf8', function (err) {
                     if (err) {
                     throw new Error('Unable to write to Podfile: ' + err);
                     }
                 });*/
             }
-        //});
 
-        /*content+= "post_install do |installer|\n\
-                    installer.pods_project.targets.each do |target|\n\
-                        target.build_configurations.each do |config|\n\
-                            //sets all pod projects with deployment_target = 12.0\n\
-                            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'\n\
-                        end\n\
-                    end\n\
-                end";*/
-        const alreadyPodInstalled = content.includes("platform :ios, '"+iosVersion+"'") || content.includes("platform :ios, '"+iosVersionInt+"'")
-        if(!alreadyPodInstalled){
             const child_process = require('child_process');
     
             var iosPath = path.join(
@@ -121,7 +117,17 @@ module.exports = function(context) {
                 }
             })
             console.log(output.stdout);
-        }
+        //});
+
+        /*content+= "post_install do |installer|\n\
+                    installer.pods_project.targets.each do |target|\n\
+                        target.build_configurations.each do |config|\n\
+                            //sets all pod projects with deployment_target = 12.0\n\
+                            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'\n\
+                        end\n\
+                    end\n\
+                end";*/
+        
     }
 
     console.log("Started updating ios to support a lower sdk version!")
