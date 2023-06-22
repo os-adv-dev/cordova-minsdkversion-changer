@@ -51,8 +51,6 @@ module.exports = function(context) {
         }
     
         var content = fs.readFileSync(podfilePath,"utf-8");
-        
-        //var alreadyPodInstalled = content.includes("platform :ios, '"+iosVersion+"'") || content.includes("platform :ios, '"+iosVersionInt+"'")
     
         content = content.replace(/([\s|\S]*)(platform :ios, '[0-9]+\.[0-9]+')([\S|\s]*)/,replacepodfile);
 
@@ -103,9 +101,7 @@ module.exports = function(context) {
                         end\n\
                     end\n\
                 end";*/
-
-        /*fs.writeFileSync(podfilePath,content);
-    
+        const alreadyPodInstalled = content.includes("platform :ios, '"+iosVersion+"'") || content.includes("platform :ios, '"+iosVersionInt+"'")
         if(!alreadyPodInstalled){
             const child_process = require('child_process');
     
@@ -121,7 +117,7 @@ module.exports = function(context) {
                 }
             })
             console.log(output.stdout);
-        }*/
+        }
     }
 
     console.log("Started updating ios to support a lower sdk version!")
