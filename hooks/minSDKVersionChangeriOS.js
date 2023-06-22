@@ -52,7 +52,9 @@ module.exports = function(context) {
     
         var content = fs.readFileSync(podfilePath,"utf-8");
     
-        const podAlreadyInstalled = content.includes("platform :ios, '"+iosVersion+"'") || content.includes("platform :ios, '"+iosVersionInt+"'")
+        //const podAlreadyInstalled = content.includes("platform :ios, '"+iosVersion+"'") || content.includes("platform :ios, '"+iosVersionInt+"'")
+        const updatedByString = "#UPDATED BY MINSDKVERSIONCHANGERPLUGIN";
+        const podAlreadyInstalled = content.includes(updatedByString);
 
         if(podAlreadyInstalled){
             return;
@@ -82,7 +84,7 @@ module.exports = function(context) {
                     return match.replace(/end/, '') + "\n" + postInstallScript.trim() + '\nend';
                 });
             
-                fs.writeFileSync(podfilePath, updatedContents, 'utf8');
+                fs.writeFileSync(podfilePath, updatedByString + "\n" + updatedContents, 'utf8');
                 
                 var content2 = fs.readFileSync(podfilePath,"utf-8");
 
@@ -96,7 +98,7 @@ module.exports = function(context) {
                 // If post_install doesn't exist, add it to the Podfile
                 var newContents = content.trim() + '\n\npost_install do |installer|\n' + postInstallScript.trim() + '\nend\n';
             
-                fs.writeFileSync(podfilePath, newContents, 'utf8');
+                fs.writeFileSync(podfilePath, updatedByString + "\n" +  newContents, 'utf8');
                 var content2 = fs.readFileSync(podfilePath,"utf-8");
 
                 console.log("NEWPODFILE - C", content2);
