@@ -19,10 +19,10 @@
     <platform name="ios">
 
 
-        <hook type="after_plugin_install" src="hooks/minSDKVersionChangeriOS.js" />
-        <hook type="before_prepare" src="hooks/minSDKVersionChangeriOS.js" />
+        <!--<hook type="after_plugin_install" src="hooks/minSDKVersionChangeriOS.js" />
+        <hook type="before_prepare" src="hooks/minSDKVersionChangeriOS.js" />-->
         <hook type="before_build" src="hooks/minSDKVersionChangeriOS.js" />
-        <hook type="before_compile" src="hooks/minSDKVersionChangeriOS.js" />
+        <!--<hook type="before_compile" src="hooks/minSDKVersionChangeriOS.js" />-->
 
         <preference name="IOS_MIN_SDK_VERSION" default="12.0"/>
 
