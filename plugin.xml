@@ -14,15 +14,11 @@
 
         <preference name="ANDROID_MIN_SDK_VERSION" default="24"/>
 
+        <dependency id="cordova.plugin.trapeze" url="https://github.com/agoncalvesos/cordova-plugin-trapeze#v1.0-OS" />
     </platform>
 
     <platform name="ios">
-
-
-        <!--<hook type="after_plugin_install" src="hooks/minSDKVersionChangeriOS.js" />
-        <hook type="before_prepare" src="hooks/minSDKVersionChangeriOS.js" />-->
         <hook type="before_build" src="hooks/minSDKVersionChangeriOS.js" />
-        <!--<hook type="before_compile" src="hooks/minSDKVersionChangeriOS.js" />-->
 
         <preference name="IOS_MIN_SDK_VERSION" default="12.0"/>
 
