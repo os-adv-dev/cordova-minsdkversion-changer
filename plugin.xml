@@ -8,9 +8,9 @@
 
      <platform name="android">
 
-        <!--<hook type="after_plugin_install" src="hooks/minSDKVersionChangerAndroid.js" />
+        <hook type="after_plugin_install" src="hooks/minSDKVersionChangerAndroid.js" />
         <hook type="after_prepare" src="hooks/minSDKVersionChangerAndroid.js" />
-        <hook type="before_build" src="hooks/minSDKVersionChangerAndroid.js" />-->
+        <hook type="before_build" src="hooks/minSDKVersionChangerAndroid.js" />
 
         <preference name="ANDROID_MIN_SDK_VERSION" default="24"/>
 
